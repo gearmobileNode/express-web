@@ -1,0 +1,38 @@
+{
+  "name": "express-web-app",
+  "version": "1.0.0",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "nodemon src/app.js"
+  },
+  "keywords": [
+    "node",
+    "express"
+  ],
+  "author": "Moe Green",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^2.0.22",
+    "prettier": "^3.5.3"
+  },
+  "nodemonConfig": {
+    "watch": [
+      "./src/**"
+    ],
+    "ignore": [
+      "data/**/*",
+      "test/*",
+      "docs/*",
+      "dist/*",
+      "src/**/*.spec.js"
+    ],
+    "ext": "js",
+    "delay": 2500
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  }
+}

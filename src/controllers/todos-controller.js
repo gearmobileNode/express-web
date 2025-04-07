@@ -1,4 +1,4 @@
-import { getTodos } from '../models/todos-model.js';
+import { getTodos, getTodo } from '../models/todos-model.js';
 
 function mainPage(_, res) {
   const todos = getTodos();
@@ -23,9 +23,52 @@ function mainPage(_, res) {
       '    <p>&nbsp;</p>';
   }
 
-  list += '  </body>' + '</html>';
+  list += '</body>' + '</html>';
 
   res.send(list);
 }
 
-export { mainPage };
+function detailPage(req, res) {
+  const todo = getTodo(req.params.id);
+
+  if (!todo) {
+    errorPage(req, res);
+    return;
+  }
+
+  const date = new Date(todo.createdAt);
+  res.send(
+    '<!doctype html>' +
+      '<html>' +
+      '  <head>' +
+      '    <meta charset="UTF-8">' +
+      `    <title>${todo.title} :: Список запланированных ` +
+      'дел</title>' +
+      '  </head>' +
+      '  <body>' +
+      `    <h1>${todo.title}</h1>` +
+      `    <p>${todo.desc}</p>` +
+      `    <p>Создано: ${date.toLocaleString()}</p>` +
+      '  </body>' +
+      '</html>',
+  );
+}
+
+function errorPage(req, res) {
+  res.status(404);
+  res.send(
+    '<!doctype html>' +
+      '<html>' +
+      '  <head>' +
+      '    <meta charset="UTF-8">' +
+      '    <title>Ошибка</title>' +
+      '  </head>' +
+      '  <body>' +
+      '    <h1>Ошибка!</h1>' +
+      '    <p>Запрошенная страница не существует.</p>' +
+      '  </body>' +
+      '</html>',
+  );
+}
+
+export { mainPage, detailPage };

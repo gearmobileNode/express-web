@@ -1,6 +1,6 @@
 import { getTodos, getTodo } from '../models/todos-model.js';
 
-function mainPage(_, res) {
+function mainController(_, res) {
   const todos = getTodos();
 
   let list =
@@ -28,11 +28,11 @@ function mainPage(_, res) {
   res.send(list);
 }
 
-function detailPage(req, res) {
+function detailController(req, res) {
   const todo = getTodo(req.params.id);
 
   if (!todo) {
-    errorPage(req, res);
+    errorController(req, res);
     return;
   }
 
@@ -54,8 +54,9 @@ function detailPage(req, res) {
   );
 }
 
-function errorPage(req, res) {
+function errorController(_, res) {
   res.status(404);
+
   res.send(
     '<!doctype html>' +
       '<html>' +
@@ -71,4 +72,4 @@ function errorPage(req, res) {
   );
 }
 
-export { mainPage, detailPage };
+export { mainController, detailController };

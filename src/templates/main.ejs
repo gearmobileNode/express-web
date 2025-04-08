@@ -1,0 +1,25 @@
+<%# подключение миксина %>
+    <%- include('includes/header.ejs') %>
+        <h1>
+            <%= title %>
+        </h1>
+        <% for (let todo of todos) { %>
+            <article class="card">
+                <header>
+                    <h2><a href="/<%= todo._id %>/">
+                            <%= todo.title %>
+                        </a></h2>
+                </header>
+                <footer>
+                    <% if (todo.desc) { %>
+                        <p>
+                            <%= todo.desc %>
+                        </p>
+                        <% } %>
+                            <p>
+                                <%= (new Date(todo.createdAt)).toLocaleString() %>
+                            </p>
+                </footer>
+            </article>
+            <% } %>
+                <%- include('includes/footer.ejs') %>

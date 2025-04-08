@@ -1,8 +1,6 @@
 import { Router } from 'express';
-import {
-  mainController,
-  detailController,
-} from '../controllers/todos-controller.js';
+import mainController from '../controllers/main-page.controller.js';
+import detailController from '../controllers/detail-page.controller.js';
 
 const router = Router();
 
